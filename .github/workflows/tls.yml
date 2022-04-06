@@ -8,7 +8,7 @@ jobs:
       - name: Check default TLS version on macos
         run: curl https://google.com/ --verbose
   tls-ubuntu:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - name: Check default TLS version on ubuntu
         run: curl https://google.com/ --verbose
