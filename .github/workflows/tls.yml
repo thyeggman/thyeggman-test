@@ -1,0 +1,26 @@
+name: TLS compatibility
+on:
+  workflow_dispatch:
+jobs:
+  tls-unix:
+    runs-on: [ubuntu-latest, macos-latest]
+    steps:
+      - name: Check TLS version compatibility on unix systems
+        run: |
+          curl https://google.com/ --tlsv1.0 --verbose
+          curl https://google.com/ --tlsv1.1 --verbose
+          curl https://google.com/ --tlsv1.2 --verbose
+          curl https://google.com/ --tlsv1.3 --verbose
+  tls-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Check TLS version compatibility on windows
+        run: |
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls10
+          Invoke-WebRequest -URI https://www.google.com/
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls11
+          Invoke-WebRequest -URI https://www.google.com/
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+          Invoke-WebRequest -URI https://www.google.com/
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls13
+          Invoke-WebRequest -URI https://www.google.com/
