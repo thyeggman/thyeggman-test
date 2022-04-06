@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Check TLS version compatibility on windows
         run: |
-          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls10
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls
           Invoke-WebRequest -URI https://www.google.com/
           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls11
           Invoke-WebRequest -URI https://www.google.com/
